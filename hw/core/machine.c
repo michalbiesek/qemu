@@ -680,12 +680,6 @@ void machine_set_cpu_numa_node(MachineState *machine,
         slot->props.has_node_id = props->has_node_id;
 
         if (machine->numa_state->hmat_enabled) {
-            if ((numa_info[props->node_id].initiator < MAX_NODES) &&
-                (props->node_id != numa_info[props->node_id].initiator)) {
-                error_setg(errp, "The initiator of CPU NUMA node %" PRId64
-                        " should be itself", props->node_id);
-                return;
-            }
             numa_info[props->node_id].has_cpu = true;
             numa_info[props->node_id].initiator = props->node_id;
         }
